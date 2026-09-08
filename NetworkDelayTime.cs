@@ -19,7 +19,7 @@ public class Solution {
 
                 if (dist[u] + i[2] < dist[i[1]]) {  // found one, lets compare if dist[v] > dist[u] + w 
                     dist[i[1]] = i[2] + dist[u]; // new path to v from current u costs lower, so update
-                    queue.Enqueue(i[1], i[2]); // add this edge to priority queue, this will be dequeued later to decide which edge we should proceed.
+                    queue.Enqueue(i[1], i[2]); // add this edge (originates from u, goes to neighbors) to priority queue, this will be dequeued later to decide which edge we should proceed.
                 }
             }
         }
