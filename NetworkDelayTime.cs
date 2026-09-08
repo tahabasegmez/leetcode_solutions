@@ -9,7 +9,7 @@ public class Solution {
 
         PriorityQueue<int, int> queue = new();
         queue.Enqueue(k, 0); // next u to explore edges that originate from it
-        dist[k] = 0; // dist[u]
+        dist[k] = 0; // dist[u], if it is the third iteration for example, then dist[u] is the shortest path to u from k, which is 0 since k is the starting point
 
         while (queue.Count > 0) {
             queue.TryDequeue(out int u, out int w);
