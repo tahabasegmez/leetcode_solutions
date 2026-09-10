@@ -1,31 +1,42 @@
 public class Solution {
     public int MinCostConnectPoints(int[][] points) {
+        int length = points.Length;
+
         PriorityQueue<int, int> queue = new();
-        bool[] visited = new bool[points.Length];
+        bool[] visited = new bool[length];
+
+        int[] minDistToPoint = new int[length];
+        Array.Fill(minDistToPoint, int.MaxValue);
 
         queue.Enqueue(0, 0);
+        minDistToPoint[0] = 0;
+
         int sum = 0;
         int connectedCount = 0; 
 
         while (queue.Count > 0) {
-            queue.TryDequeue(out int curIdx, out int c);
+            queue.TryDequeue(out int curIdx, out int dist);
 
             if (visited[curIdx]) continue;
 
             visited[curIdx] = true;
-            sum += c;
+            sum += dist;
             connectedCount++;
 
-            if (connectedCount == points.Length) break;
+            if (connectedCount == length) break;
 
             int curX = points[curIdx][0];
             int curY = points[curIdx][1];
 
-            for (int i = 0; i < points.Length; i++) {
+            for (int i = 0; i < length; i++) {
                 if (visited[i] || curIdx == i) continue;
 
-                int dist = Math.Abs(curX - points[i][0]) + Math.Abs(curY - points[i][1]);
-                queue.Enqueue(i, dist);
+                dist = Math.Abs(curX - points[i][0]) + Math.Abs(curY - points[i][1]);
+                
+                if (dist < minDistToPoint[i]) {
+                    minDistToPoint[i] = dist;
+                    queue.Enqueue(i, dist);
+                }
             }
         }
 
