@@ -9,7 +9,7 @@ public class Solution {
         Array.Fill(minDistToPoint, int.MaxValue);
 
         queue.Enqueue(0, 0);
-        minDistToPoint[0] = 0;
+        minDistToPoint[0] = 0; // don't wanna add to queue if a lower cost is already found to that point.
 
         int sum = 0;
         int connectedCount = 0; 
